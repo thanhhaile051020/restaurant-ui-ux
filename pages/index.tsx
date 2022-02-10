@@ -111,7 +111,7 @@ export default function Home() {
             z-[10] mb-[2rem] hidden 
           items-center justify-end space-x-2 -text--color-golden
            ${
-             hidePage ? ' bottom-[-20%]' : 'bottom-[-2%] '
+             hidePage ? ' bottom-[-30%]' : 'bottom-[-2%] '
            } transition-[300ms] md:inline-flex`}
           >
             <a
