@@ -1,4 +1,3 @@
-import bg from '../assets/bg.png';
 import chef from '../assets/chef.png';
 import G from '../assets/G.png';
 import gallery01 from '../assets/gallery01.png';
@@ -22,7 +21,6 @@ import quote from '../assets/quote.png';
 import gericht from '../assets/gericht.png';
 
 export default {
-  bg,
   chef,
   G,
   gallery01,
