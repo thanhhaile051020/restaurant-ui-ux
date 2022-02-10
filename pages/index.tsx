@@ -34,6 +34,11 @@ export default function Home() {
     []
   )
 
+  const debounceNav = useCallback(
+    debounce((value) => setNavbar(true), 300),
+    []
+  )
+
   const onScroll = () => {
     setHidePage(false)
     debounceHide()
@@ -42,9 +47,9 @@ export default function Home() {
     let currentScrollPos = page?.getBoundingClientRect().y
     setOffset(currentScrollPos)
     if (offset < currentScrollPos!) {
-      setNavbar(true)
+      debounceNav(true)
     } else {
-      setNavbar(false)
+      debounceNav(false)
     }
   }
 
