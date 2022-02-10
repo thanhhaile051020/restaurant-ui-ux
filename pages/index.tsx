@@ -21,7 +21,7 @@ import {
   RiNumber5,
   RiNumber6,
 } from 'react-icons/ri'
-import { debounce } from 'lodash'
+import { debounce } from "lodash"
 export default function Home() {
   const time = useClock()
   // console.log(moment(time.toString()), 'time')
