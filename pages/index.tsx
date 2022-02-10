@@ -30,18 +30,18 @@ export default function Home() {
   const [hidePage, setHidePage] = useState(true)
   const [navbar, setNavbar] = useState(true)
   const debounceHide = useCallback(
-    debounce(() => setHidePage(true), 3000),
+    debounce((value) => setHidePage(value), 3000),
     []
   )
 
   const debounceNav = useCallback(
-    debounce((value) => setNavbar(value), 300),
+    debounce((value) => setNavbar(value), 0),
     []
   )
 
   const onScroll = () => {
     setHidePage(false)
-    debounceHide()
+    debounceHide(true)
     const page = document.getElementById('home')
 
     let currentScrollPos = page?.getBoundingClientRect().y
@@ -78,54 +78,56 @@ export default function Home() {
           <Footer />
 
           <div
+          onMouseEnter={()=>debounceHide(false)}
+          onMouseLeave={()=>debounceHide(true)}
             id="pagee"
-            className={`flex-end fixed right-[40%] bottom-[0%]
+            className={`flex-end fixed right-[40%] bottom-[-2%]
             z-[10] mb-[2rem] hidden 
           items-center justify-end space-x-2 -text--color-golden
            ${
-             hidePage ? 'translate-y-96' : 'translate-y-0 '
+             hidePage ? ' bottom-[-30%]' : 'bottom-[-2%] '
            } transition-[300ms] md:inline-flex`}
           >
             <a
               href="#home"
-              className="flex h-[20px] w-[20px]  items-center  justify-center rounded-full -bg--color-golden -text--color-black"
+              className="flex h-[15px] w-[15px]  items-center  justify-center rounded-full -bg--color-golden -text--color-black"
             >
               {' '}
-              <RiNumber1 className=" h-[15px] w-[15px]" />
+              <RiNumber1 className=" h-[10px] w-[10px]" />
             </a>
 
             <a
               href="#about"
-              className="flex h-[20px] w-[20px] items-center  justify-center rounded-full -bg--color-golden -text--color-black"
+              className="flex h-[15px] w-[15px] items-center  justify-center rounded-full -bg--color-golden -text--color-black"
             >
-              <RiNumber2 className=" h-[15px] w-[15px]" />
+              <RiNumber2 className=" h-[10px] w-[10px]" />
             </a>
             <a
               href="#menu"
-              className="flex h-[20px] w-[20px] items-center  justify-center rounded-full -bg--color-golden -text--color-black"
+              className="flex h-[15px] w-[15px] items-center  justify-center rounded-full -bg--color-golden -text--color-black"
             >
               {' '}
-              <RiNumber3 className=" h-[15px] w-[15px]" />
+              <RiNumber3 className=" h-[10px] w-[10px]" />
             </a>
             <a
               href="#chef"
-              className="flex h-[20px] w-[20px] items-center  justify-center rounded-full -bg--color-golden -text--color-black"
+              className="flex h-[15px] w-[15px] items-center  justify-center rounded-full -bg--color-golden -text--color-black"
             >
-              <RiNumber4 className=" h-[15px] w-[15px]" />
+              <RiNumber4 className=" h-[10px] w-[10px]" />
             </a>
             <a
               href="#intro"
-              className="flex h-[20px] w-[20px] items-center  justify-center rounded-full -bg--color-golden -text--color-black"
+              className="flex h-[15px] w-[15px] items-center  justify-center rounded-full -bg--color-golden -text--color-black"
             >
               {' '}
-              <RiNumber5 className=" h-[15px] w-[15px]" />
+              <RiNumber5 className=" h-[10px] w-[10px]" />
             </a>
             <a
               href="#gallery"
-              className="flex h-[20px] w-[20px] items-center  justify-center rounded-full -bg--color-golden -text--color-black"
+              className="flex h-[15px] w-[15px] items-center  justify-center rounded-full -bg--color-golden -text--color-black"
             >
               {' '}
-              <RiNumber6 className=" h-[15px] w-[15px]  " />
+              <RiNumber6 className=" h-[10px] w-[10px]  " />
             </a>
           </div>
         </div>
