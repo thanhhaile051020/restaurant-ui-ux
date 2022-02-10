@@ -98,7 +98,7 @@
   }
 
   .app__bg {
-    background-image: url('../assets/bg.png');
+    background-image: url('../public/bg.png');
     @apply bg-cover bg-fixed bg-center bg-repeat;
   }
 
