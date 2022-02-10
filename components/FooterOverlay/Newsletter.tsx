@@ -4,7 +4,7 @@ import SubHeading from '../SubHeading/SubHeading'
 const Newsletter = () => (
   <div className="z-[0]  md:py-[2rem] md:px-[4rem] 
   border-[1px] md:border-solid -border--color-golden -bg--color-black
-  py-[2rem] px-[4rem]
+  py-[2rem] px-[1rem]
   ">
     <div className="flex flex-col items-center justify-center
      ">
