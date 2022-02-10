@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import useClock from '../hooks/useClock'
 import moment from 'moment'
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import Footer from '../container/Footer/Footer'
 import Navbar from '../components/Navbar/Navbar'
 import FindUs from '../container/Findus/FindUs'
@@ -25,7 +25,7 @@ import { debounce } from 'lodash'
 export default function Home() {
   const time = useClock()
   // console.log(moment(time.toString()), 'time')
-
+  const introRef = useRef<any>()
   const [offset, setOffset] = useState<any>(0)
   const [hidePage, setHidePage] = useState(true)
   const [navbar, setNavbar] = useState(true)
@@ -79,6 +79,12 @@ export default function Home() {
     return containers[containers.length - 1]
   }
 
+  useEffect(() => {
+    if (currentContainer === 'intro' && introRef.current) {
+      introRef.current.playVideo()
+    }
+  }, [currentContainer])
+
   return (
     <div className="-bg--color-black  ">
       <Head>
@@ -97,7 +103,7 @@ export default function Home() {
           <AboutUs />
           <SpecialMenu />
           <Chef />
-          <Intro />
+          <Intro ref={introRef} />
           <Laurels />
           <Gallery />
           <FindUs />

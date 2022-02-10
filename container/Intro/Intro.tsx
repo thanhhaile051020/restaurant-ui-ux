@@ -1,8 +1,19 @@
-import React, { MutableRefObject, useRef, useState } from 'react'
+import React, {
+  MutableRefObject,
+  useImperativeHandle,
+  useRef,
+  useState,
+} from 'react'
 import { BsFillPlayFill, BsPauseFill } from 'react-icons/bs'
-
-const Intro = () => {
+import { forwardRef } from 'react'
+const Intro = (props: any, ref: any) => {
   const vidRef = useRef<any>()
+  useImperativeHandle(ref, () => ({
+    playVideo: () => {
+      handleVideo()
+    },
+  }))
+
   const [playVideo, setPlayVideo] = useState<boolean>(false)
 
   const handleVideo = () => {
@@ -19,8 +30,9 @@ const Intro = () => {
         ref={vidRef}
         // type="video/mp4"
         muted
-        loop
+        // loop
         controls={false}
+        onEnded={() => setPlayVideo(false)}
         src="./meal.mp4"
         className="h-[100%] w-[100%] object-cover"
       ></video>
@@ -47,4 +59,4 @@ const Intro = () => {
   )
 }
 
-export default Intro
+export default forwardRef(Intro)
