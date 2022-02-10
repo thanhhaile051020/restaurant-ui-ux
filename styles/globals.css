@@ -98,7 +98,8 @@
   }
 
   .app__bg {
-    @apply bg-[url('../assets/bg.png')] bg-cover bg-fixed bg-center bg-repeat;
+    background-image:url('/images/bg.png');
+    @apply bg-cover bg-fixed bg-center bg-repeat;
   }
 
   .app__wrapper {
