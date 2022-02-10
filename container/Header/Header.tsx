@@ -1,12 +1,13 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import SubHeading from '../../components/SubHeading/SubHeading'
 
 import { images } from '../../constants'
 import styles from './Header.module.css'
 
 const Headerr = ({}) => {
+
   return (
-    <div className="app__wrapper section__padding -bg--color-black " id="home">
+    <div className="app__wrapper section__padding -bg--color-black mt-[74.96px]" id="home">
       <div className="app__wrapper_info ">
         <SubHeading title="Chase the new flavor" />
         <h1

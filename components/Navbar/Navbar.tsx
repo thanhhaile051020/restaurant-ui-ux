@@ -1,17 +1,20 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { GiHamburgerMenu } from 'react-icons/gi'
 import { MdOutlineRestaurantMenu } from 'react-icons/md'
 import styles from './Navbar.module.css'
 import images from '../../constants/images'
-const Navbar = () => {
+const Navbar = ({navbar}:{navbar:boolean}) => {
   const [toggleMenu, setToggleMenu] = useState<any>(null)
+  const [offset, setOffset] = useState<any>(null)
+
 
   return (
     <nav
-      className="flex w-[100%] items-center justify-between
-     -bg--color-black p-[1rem] sm:py-[1rem] sm:px-[2rem]
-     "
+      className={`fixed flex w-[100%] items-center
+     justify-between -bg--color-black p-[1rem] transition-[1s] ease-out sm:py-[1rem] 
+      sm:px-[2rem] ${navbar ? 'top-[0px]' : 'top-[-74.960px]'} z-[10]`}
     >
+      
       <div className=" flex items-center justify-start">
         <img
           className="w-[110px] sm:w-[150px] 2xl:w-[210px] "

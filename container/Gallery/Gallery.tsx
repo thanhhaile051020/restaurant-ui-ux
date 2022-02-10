@@ -28,7 +28,7 @@ const Gallery = () => {
   return (
     <div
       className="flex__center flex flex-col -bg--color-black py-[4rem] 
-      pr-0  pl-[2rem] md:pl-[4rem] lg:flex-row lg:pl-[6rem] "
+      pr-0  pl-[2rem] md:pl-[4rem] lg:flex-row lg:pl-[6rem] " id="gallery"
     >
       <div
         className="flex md:min-w-[500px] flex-1 flex-col items-start justify-center pr-[2rem]

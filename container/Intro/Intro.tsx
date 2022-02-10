@@ -14,7 +14,7 @@ const Intro = () => {
     }
   }
   return (
-    <div className="relative h-[100vh]">
+    <div className="relative h-[100vh]" id="intro">
       <video
         ref={vidRef}
         // type="video/mp4"
