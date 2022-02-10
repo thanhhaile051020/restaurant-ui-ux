@@ -11,8 +11,8 @@ const Navbar = ({navbar}:{navbar:boolean}) => {
   return (
     <nav
       className={`fixed flex w-[100%] items-center
-     justify-between -bg--color-black p-[1rem] transition-[1s] ease-out sm:py-[1rem] 
-      sm:px-[2rem] ${navbar ? 'top-[0px]' : 'top-[-74.960px]'} z-[10]`}
+     justify-between -bg--color-black p-[1rem] transition-[1000ms]  ease-out sm:py-[1rem] 
+      sm:px-[2rem] ${navbar ? 'translate-y[0px]' : 'translate-y[-74.960px]'} z-[10]`}
     >
       
       <div className=" flex items-center justify-start">

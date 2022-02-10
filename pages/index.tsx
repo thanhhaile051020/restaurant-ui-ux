@@ -35,7 +35,7 @@ export default function Home() {
   )
 
   const debounceNav = useCallback(
-    debounce((value) => setNavbar(true), 300),
+    debounce((value) => setNavbar(value), 1000),
     []
   )
 
