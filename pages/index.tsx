@@ -21,7 +21,7 @@ import {
   RiNumber5,
   RiNumber6,
 } from 'react-icons/ri'
-import { debounce } from "lodash"
+import { debounce } from 'lodash'
 export default function Home() {
   const time = useClock()
   // console.log(moment(time.toString()), 'time')
@@ -29,8 +29,16 @@ export default function Home() {
   const [offset, setOffset] = useState<any>(0)
   const [hidePage, setHidePage] = useState(true)
   const [navbar, setNavbar] = useState(true)
+  const [currentContainer, setCurrentContainer] = useState<string>('home')
   const debounceHide = useCallback(
     debounce((value) => setHidePage(value), 3000),
+    []
+  )
+  const debounceGetCurrentContainer = useCallback(
+    debounce((value) => {
+      let currentContainer = getCurrentContainer(value)
+      setCurrentContainer(currentContainer)
+    }, 500),
     []
   )
 
@@ -39,7 +47,10 @@ export default function Home() {
     []
   )
 
-  const onScroll = () => {
+  const onScroll = (value: any) => {
+    const element = value.target
+    debounceGetCurrentContainer(element.scrollTop)
+    // console.log("value",element.scrollHeight ,element.scrollTop,element.clientHeight)
     setHidePage(false)
     debounceHide(true)
     const page = document.getElementById('home')
@@ -51,6 +62,21 @@ export default function Home() {
     } else {
       debounceNav(false)
     }
+  }
+
+  const getCurrentContainer = (value: number) => {
+    let containers = ['home', 'about', 'menu', 'chef', 'intro', 'gallery']
+    let currentHeight = 70
+
+    for (let i = 0; i < containers.length; i++) {
+      let cont = containers[i]
+      let element: any = document.getElementById(cont)?.getBoundingClientRect()
+      currentHeight += element.height
+      if (value <= currentHeight) {
+        return cont
+      }
+    }
+    return containers[containers.length - 1]
   }
 
   return (
@@ -78,19 +104,24 @@ export default function Home() {
           <Footer />
 
           <div
-          onMouseEnter={()=>debounceHide(false)}
-          onMouseLeave={()=>debounceHide(true)}
+            onMouseEnter={() => debounceHide(false)}
+            onMouseLeave={() => debounceHide(true)}
             id="pagee"
-            className={`flex-end fixed right-[40%] bottom-[-2%]
+            className={`flex-end fixed right-[calc(50%-65px)] bottom-[-2%]
             z-[10] mb-[2rem] hidden 
           items-center justify-end space-x-2 -text--color-golden
            ${
-             hidePage ? ' bottom-[-30%]' : 'bottom-[-2%] '
+             hidePage ? ' bottom-[-20%]' : 'bottom-[-2%] '
            } transition-[300ms] md:inline-flex`}
           >
             <a
               href="#home"
-              className="flex h-[15px] w-[15px]  items-center  justify-center rounded-full -bg--color-golden -text--color-black"
+              className={`flex h-[15px] w-[15px] items-center  justify-center rounded-full 
+              ${
+                currentContainer === 'home'
+                  ? '-bg--color-golden -text--color-black'
+                  : '-bg--color-black -text--color-golden'
+              } `}
             >
               {' '}
               <RiNumber1 className=" h-[10px] w-[10px]" />
@@ -98,33 +129,58 @@ export default function Home() {
 
             <a
               href="#about"
-              className="flex h-[15px] w-[15px] items-center  justify-center rounded-full -bg--color-golden -text--color-black"
+              className={`flex h-[15px] w-[15px] items-center  justify-center rounded-full 
+              ${
+                currentContainer === 'about'
+                  ? '-bg--color-golden -text--color-black'
+                  : '-bg--color-black -text--color-golden'
+              } `}
             >
               <RiNumber2 className=" h-[10px] w-[10px]" />
             </a>
             <a
               href="#menu"
-              className="flex h-[15px] w-[15px] items-center  justify-center rounded-full -bg--color-golden -text--color-black"
+              className={`flex h-[15px] w-[15px] items-center  justify-center rounded-full 
+              ${
+                currentContainer === 'menu'
+                  ? '-bg--color-golden -text--color-black'
+                  : '-bg--color-black -text--color-golden'
+              } `}
             >
               {' '}
               <RiNumber3 className=" h-[10px] w-[10px]" />
             </a>
             <a
               href="#chef"
-              className="flex h-[15px] w-[15px] items-center  justify-center rounded-full -bg--color-golden -text--color-black"
+              className={`flex h-[15px] w-[15px] items-center  justify-center rounded-full 
+              ${
+                currentContainer === 'chef'
+                  ? '-bg--color-golden -text--color-black'
+                  : '-bg--color-black -text--color-golden'
+              } `}
             >
               <RiNumber4 className=" h-[10px] w-[10px]" />
             </a>
             <a
               href="#intro"
-              className="flex h-[15px] w-[15px] items-center  justify-center rounded-full -bg--color-golden -text--color-black"
+              className={`flex h-[15px] w-[15px] items-center  justify-center rounded-full 
+              ${
+                currentContainer === 'intro'
+                  ? '-bg--color-golden -text--color-black'
+                  : '-bg--color-black -text--color-golden'
+              } `}
             >
               {' '}
               <RiNumber5 className=" h-[10px] w-[10px]" />
             </a>
             <a
               href="#gallery"
-              className="flex h-[15px] w-[15px] items-center  justify-center rounded-full -bg--color-golden -text--color-black"
+              className={`flex h-[15px] w-[15px] items-center  justify-center rounded-full 
+              ${
+                currentContainer === 'gallery'
+                  ? '-bg--color-golden -text--color-black'
+                  : '-bg--color-black -text--color-golden'
+              } `}
             >
               {' '}
               <RiNumber6 className=" h-[10px] w-[10px]  " />

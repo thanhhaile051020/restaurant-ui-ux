@@ -8,7 +8,7 @@ const Headerr = ({}) => {
 
   return (
     <div className="app__wrapper section__padding -bg--color-black mt-[74.96px]" id="home">
-      <div className="app__wrapper_info ">
+      <div className="app__wrapper_info">
         <SubHeading title="Chase the new flavor" />
         <h1
           className="p__cormorant text-[90px] leading-[117px]
