@@ -1,0 +1,27 @@
+.li {
+  @apply flex flex-1 flex-row items-center justify-center;
+}
+.li li {
+  @apply my-[0rem] mx-[1rem] cursor-pointer hidden lg:inline ;
+}
+
+.li li :hover {
+  @apply -text--color-grey;
+}
+.navbar_login {
+  @apply hidden sm:inline-flex flex items-center justify-end;
+}
+.navbar_login a {
+  @apply my-[0] mx-[1rem] transition-[0.5s] ease-linear;
+}
+
+.navbar_login :hover {
+  @apply border-b-[1px] border-solid -border--color-golden;
+}
+
+.navbar_login div {
+  @apply h-[30px] w-[1px] -bg--color-grey;
+}
+.smallscreen {
+  @apply w-2 lg:inline-flex;
+}
