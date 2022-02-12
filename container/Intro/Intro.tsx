@@ -1,11 +1,13 @@
 import React, {
   MutableRefObject,
+  useEffect,
   useImperativeHandle,
   useRef,
   useState,
 } from 'react'
 import { BsFillPlayFill, BsPauseFill } from 'react-icons/bs'
 import { forwardRef } from 'react'
+
 const Intro = (props: any, ref: any) => {
   const vidRef = useRef<any>()
   useImperativeHandle(ref, () => ({
@@ -13,6 +15,7 @@ const Intro = (props: any, ref: any) => {
       handleVideo()
     },
   }))
+
 
   const [playVideo, setPlayVideo] = useState<boolean>(false)
 

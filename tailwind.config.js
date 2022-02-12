@@ -21,7 +21,15 @@ module.exports = {
       screens: {
         '3xl': '2000px',
       },
+      keyframes: {
+        fadeIn: {
+          '100%': { opacity: '1', filter: 'blur(0)' },
+        },
+      },
     },
   },
-  plugins: [require("tailwind-scrollbar-hide")],
+  plugins: [
+    require('tailwind-scrollbar-hide'),
+    require('tailwindcss-animation-delay'),
+  ],
 }

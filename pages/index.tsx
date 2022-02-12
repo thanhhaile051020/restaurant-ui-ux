@@ -22,6 +22,10 @@ import {
   RiNumber6,
 } from 'react-icons/ri'
 import { debounce } from 'lodash'
+import { useRecoilState } from 'recoil'
+import {containerState} from '../atoms/containerAtom'
+import SmoothScroll from '../components/SmoothScroll/SmoothScroll'
+// import LocomotiveScroll from 'locomotive-scroll';
 export default function Home() {
   const time = useClock()
   // console.log(moment(time.toString()), 'time')
@@ -30,6 +34,7 @@ export default function Home() {
   const [hidePage, setHidePage] = useState(true)
   const [navbar, setNavbar] = useState(true)
   const [currentContainer, setCurrentContainer] = useState<string>('home')
+  const [currentContainerAtom,setCurrentContainerAtom] =useRecoilState<string>(containerState)
   const debounceHide = useCallback(
     debounce((value) => setHidePage(value), 3000),
     []
@@ -38,6 +43,7 @@ export default function Home() {
     debounce((value) => {
       let currentContainer = getCurrentContainer(value)
       setCurrentContainer(currentContainer)
+      setCurrentContainerAtom(currentContainer)
     }, 500),
     []
   )
@@ -85,8 +91,11 @@ export default function Home() {
     }
   }, [currentContainer])
 
+
+
+
   return (
-    <div className="-bg--color-black  ">
+    <div className="-bg--color-black">
       <Head>
         <title>Create Next App</title>
         <link rel="icon" href="/favicon.ico" />
@@ -97,6 +106,7 @@ export default function Home() {
         className="h-screen overflow-y-scroll scrollbar-hide"
         id="maincontainer"
       >
+        <SmoothScroll />
         <div className="relative">
           <Navbar navbar={navbar} />
           <Headerr />
