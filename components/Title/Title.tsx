@@ -35,6 +35,7 @@ const Title = ({
     <h1 className={`${className} ${styles.textAnimation}`}>
       {conertTitle.map((title: string, index) => (
         <span
+        key={index}
           className={`${className}  ${styles.span} 
         `}
         >

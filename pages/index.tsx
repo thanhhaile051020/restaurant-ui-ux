@@ -13,57 +13,66 @@ import SpecialMenu from '../container/Menu/SpecialMenu'
 import AboutUs from '../container/AboutUs/AboutUs'
 import Headerr from '../container/Header/Header'
 import { BsArrowRightShort } from 'react-icons/bs'
-import {
-  RiNumber1,
-  RiNumber2,
-  RiNumber3,
-  RiNumber4,
-  RiNumber5,
-  RiNumber6,
-} from 'react-icons/ri'
+
 import { debounce } from 'lodash'
 import { useRecoilState } from 'recoil'
-import {containerState} from '../atoms/containerAtom'
+import { containerState } from '../atoms/containerAtom'
+import Scrollbar from 'react-smooth-scrollbar'
 import SmoothScroll from '../components/SmoothScroll/SmoothScroll'
+
+import CurrentContainer from '../components/CurrentContainer/CurrentContainer'
+
+import styles from './index.module.css'
 // import LocomotiveScroll from 'locomotive-scroll';
 export default function Home() {
   const time = useClock()
   // console.log(moment(time.toString()), 'time')
   const introRef = useRef<any>()
-  const [offset, setOffset] = useState<any>(0)
+  const [offsetY, setOffsetY] = useState<any>(0)
   const [hidePage, setHidePage] = useState(true)
   const [navbar, setNavbar] = useState(true)
   const [currentContainer, setCurrentContainer] = useState<string>('home')
-  const [currentContainerAtom,setCurrentContainerAtom] =useRecoilState<string>(containerState)
+  const scrollbarRef = useRef<any>(null)
+  const [currentContainerAtom, setCurrentContainerAtom] =
+    useRecoilState<string>(containerState)
   const debounceHide = useCallback(
-    debounce((value) => setHidePage(value), 3000),
+    debounce((value) => {
+      setHidePage(value)
+      // console.log('work')
+    }, 3000),
     []
   )
   const debounceGetCurrentContainer = useCallback(
     debounce((value) => {
       let currentContainer = getCurrentContainer(value)
+      // console.log('cur', currentContainer)
       setCurrentContainer(currentContainer)
       setCurrentContainerAtom(currentContainer)
     }, 500),
     []
   )
 
+  useEffect(() => {
+    // console.log('state', navbar, hidePage)
+  }, [navbar, hidePage])
   const debounceNav = useCallback(
     debounce((value) => setNavbar(value), 0),
     []
   )
 
-  const onScroll = (value: any) => {
-    const element = value.target
-    debounceGetCurrentContainer(element.scrollTop)
+  const onScroll = (value: any, data: any) => {
+    const { offset } = value
+
+    debounceGetCurrentContainer(offset.y)
     // console.log("value",element.scrollHeight ,element.scrollTop,element.clientHeight)
     setHidePage(false)
     debounceHide(true)
     const page = document.getElementById('home')
 
     let currentScrollPos = page?.getBoundingClientRect().y
-    setOffset(currentScrollPos)
-    if (offset < currentScrollPos!) {
+    setOffsetY(currentScrollPos)
+    // console.log('alo', offsetY,currentScrollPos)
+    if (offsetY < currentScrollPos!) {
       debounceNav(true)
     } else {
       debounceNav(false)
@@ -91,9 +100,6 @@ export default function Home() {
     }
   }, [currentContainer])
 
-
-
-
   return (
     <div className="-bg--color-black">
       <Head>
@@ -101,108 +107,31 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main
-        onScroll={onScroll}
-        className="h-screen overflow-y-scroll scrollbar-hide"
-        id="maincontainer"
-      >
-        <SmoothScroll />
-        <div className="relative">
-          <Navbar navbar={navbar} />
-          <Headerr />
-          <AboutUs />
-          <SpecialMenu />
-          <Chef />
-          <Intro ref={introRef} />
-          <Laurels />
-          <Gallery />
-          <FindUs />
-          <Footer />
-
-          <div
-            onMouseEnter={() => debounceHide(false)}
-            onMouseLeave={() => debounceHide(true)}
-            id="pagee"
-            className={`flex-end fixed right-[calc(50%-65px)] bottom-[-2%]
-            z-[10] mb-[2rem] hidden 
-          items-center justify-end space-x-2 -text--color-golden
-           ${
-             hidePage ? ' bottom-[-30%]' : 'bottom-[-2%] '
-           } transition-[300ms] md:inline-flex`}
-          >
-            <a
-              href="#home"
-              className={`flex h-[15px] w-[15px] items-center  justify-center rounded-full 
-              ${
-                currentContainer === 'home'
-                  ? '-bg--color-golden -text--color-black'
-                  : '-bg--color-black -text--color-golden'
-              } `}
-            >
-              {' '}
-              <RiNumber1 className=" h-[10px] w-[10px]" />
-            </a>
-
-            <a
-              href="#about"
-              className={`flex h-[15px] w-[15px] items-center  justify-center rounded-full 
-              ${
-                currentContainer === 'about'
-                  ? '-bg--color-golden -text--color-black'
-                  : '-bg--color-black -text--color-golden'
-              } `}
-            >
-              <RiNumber2 className=" h-[10px] w-[10px]" />
-            </a>
-            <a
-              href="#menu"
-              className={`flex h-[15px] w-[15px] items-center  justify-center rounded-full 
-              ${
-                currentContainer === 'menu'
-                  ? '-bg--color-golden -text--color-black'
-                  : '-bg--color-black -text--color-golden'
-              } `}
-            >
-              {' '}
-              <RiNumber3 className=" h-[10px] w-[10px]" />
-            </a>
-            <a
-              href="#chef"
-              className={`flex h-[15px] w-[15px] items-center  justify-center rounded-full 
-              ${
-                currentContainer === 'chef'
-                  ? '-bg--color-golden -text--color-black'
-                  : '-bg--color-black -text--color-golden'
-              } `}
-            >
-              <RiNumber4 className=" h-[10px] w-[10px]" />
-            </a>
-            <a
-              href="#intro"
-              className={`flex h-[15px] w-[15px] items-center  justify-center rounded-full 
-              ${
-                currentContainer === 'intro'
-                  ? '-bg--color-golden -text--color-black'
-                  : '-bg--color-black -text--color-golden'
-              } `}
-            >
-              {' '}
-              <RiNumber5 className=" h-[10px] w-[10px]" />
-            </a>
-            <a
-              href="#gallery"
-              className={`flex h-[15px] w-[15px] items-center  justify-center rounded-full 
-              ${
-                currentContainer === 'gallery'
-                  ? '-bg--color-golden -text--color-black'
-                  : '-bg--color-black -text--color-golden'
-              } `}
-            >
-              {' '}
-              <RiNumber6 className=" h-[10px] w-[10px]  " />
-            </a>
+      <main id="maincontainer " className="relative">
+        <Navbar navbar={navbar} />
+        <Scrollbar
+          ref={scrollbarRef}
+          className={`h-screen overflow-y-scroll scrollbar-hide ${styles.hideScrollbar}`}
+          onScroll={onScroll}
+          thumbMinSize={0}
+        >
+          <div className="">
+            <Headerr />
+            <AboutUs />
+            <SpecialMenu />
+            <Chef />
+            <Intro ref={introRef} />
+            <Laurels />
+            <Gallery />
+            <FindUs />
+            <Footer />
           </div>
-        </div>
+        </Scrollbar>
+        <CurrentContainer
+          hidePage={hidePage}
+          currentContainer={currentContainer}
+          debounceHide={debounceHide}
+        ></CurrentContainer>
       </main>
     </div>
   )

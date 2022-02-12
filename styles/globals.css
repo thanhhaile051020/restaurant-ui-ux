@@ -142,7 +142,12 @@
     outline: none;
     cursor: pointer;
   }
-
+  .scrollbar-track-y{
+    width: 0px !important;
+  }
+  .scrollbar-thumb-y{
+    width: 0px !important;
+  }
   .p__cormorant {
     font-family: var(--font-base);
     color: var(--color-white);

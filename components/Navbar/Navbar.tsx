@@ -6,6 +6,9 @@ import images from '../../constants/images'
 const Navbar = ({ navbar }: { navbar: boolean }) => {
   const [toggleMenu, setToggleMenu] = useState<any>(null)
   const [offset, setOffset] = useState<any>(null)
+  useEffect(() => {
+    console.log('asdasdasdasd', navbar)
+  }, [navbar])
 
   return (
     <nav
