@@ -6,15 +6,12 @@ import images from '../../constants/images'
 const Navbar = ({ navbar }: { navbar: boolean }) => {
   const [toggleMenu, setToggleMenu] = useState<any>(null)
   const [offset, setOffset] = useState<any>(null)
-  useEffect(() => {
-    console.log('asdasdasdasd', navbar)
-  }, [navbar])
 
   return (
     <nav
       className={`fixed flex w-[100%] items-center
      justify-between -bg--color-black p-[1rem] transition-[100ms] ease-out sm:py-[1rem] 
-      sm:px-[2rem] ${navbar ? 'top-[0px]' : 'top-[-74.960px]'} z-[10]`}
+      sm:px-[2rem] ${navbar ? 'top-[0px]' : 'top-[-90.960px]'} z-[10]`}
     >
       <div className=" flex items-center justify-start">
         <img

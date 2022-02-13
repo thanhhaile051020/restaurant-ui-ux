@@ -101,24 +101,22 @@ export default function Home() {
   }, [currentContainer])
 
   return (
-    <div className="-bg--color-black">
+    <div className="-bg--color-black h-screen">
       <Head>
         <title>Restaurant UI UX</title>
-        <link rel="icon" href="/favicon.ico"  />
-       
-        <meta name="description" content="Restaurant UI UX for e-commerce"/>
-       
+        <link rel="icon" href="/favicon.ico" />
+        <meta name="description" content="Restaurant UI UX for e-commerce" />
       </Head>
 
-      <main id="maincontainer " className="relative">
+      <main id="maincontainer " className="relative ">
         <Navbar navbar={navbar} />
         <Scrollbar
           ref={scrollbarRef}
-          className={`h-screen overflow-y-scroll scrollbar-hide ${styles.hideScrollbar}`}
+          className={`h-screen overflow-y-scroll scrollbar-hide ${styles} `}
           onScroll={onScroll}
           thumbMinSize={0}
         >
-          <div className="">
+          <div className=" -bg--color-black">
             <Headerr />
             <AboutUs />
             <SpecialMenu />
