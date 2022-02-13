@@ -9,9 +9,11 @@ const Navbar = ({ navbar }: { navbar: boolean }) => {
 
   return (
     <nav
-      className={`fixed flex w-[100%] items-center
+      className={`fixed flex  items-center
      justify-between -bg--color-black p-[1rem] transition-[100ms] ease-out sm:py-[1rem] 
-      sm:px-[2rem] ${navbar ? 'top-[0px]' : 'top-[-90.960px]'} z-[10]`}
+      sm:px-[2rem] ${
+        navbar ? 'top-[0px]' : 'top-[-90.960px]'
+      } w-[calc(100%-12px)] z-[10]`}
     >
       <div className=" flex items-center justify-start">
         <img
