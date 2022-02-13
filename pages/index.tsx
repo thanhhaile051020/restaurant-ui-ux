@@ -103,8 +103,11 @@ export default function Home() {
   return (
     <div className="-bg--color-black">
       <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
+        <title>Restaurant UI UX</title>
+        <link rel="icon" href="/favicon.ico"  />
+       
+        <meta name="description" content="Restaurant UI UX for e-commerce"/>
+       
       </Head>
 
       <main id="maincontainer " className="relative">
