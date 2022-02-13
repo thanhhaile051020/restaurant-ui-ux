@@ -12,13 +12,10 @@ import Chef from '../container/Chef/Chef'
 import SpecialMenu from '../container/Menu/SpecialMenu'
 import AboutUs from '../container/AboutUs/AboutUs'
 import Headerr from '../container/Header/Header'
-import { BsArrowRightShort } from 'react-icons/bs'
 
 import { debounce } from 'lodash'
 import { useRecoilState } from 'recoil'
 import { containerState } from '../atoms/containerAtom'
-import Scrollbar from 'react-smooth-scrollbar'
-import SmoothScroll from '../components/SmoothScroll/SmoothScroll'
 
 import CurrentContainer from '../components/CurrentContainer/CurrentContainer'
 
@@ -28,7 +25,7 @@ export default function Home() {
   const time = useClock()
   // console.log(moment(time.toString()), 'time')
   const introRef = useRef<any>()
-  const [offsetY, setOffsetY] = useState<any>(0)
+  const [offset, setOffset] = useState<any>(0)
   const [hidePage, setHidePage] = useState(true)
   const [navbar, setNavbar] = useState(true)
   const [currentContainer, setCurrentContainer] = useState<string>('home')
@@ -60,19 +57,17 @@ export default function Home() {
     []
   )
 
-  const onScroll = (value: any, data: any) => {
-    const { offset } = value
-
-    debounceGetCurrentContainer(offset.y)
+  const onScroll = (value: any) => {
+    const element = value.target
+    debounceGetCurrentContainer(element.scrollTop)
     // console.log("value",element.scrollHeight ,element.scrollTop,element.clientHeight)
     setHidePage(false)
     debounceHide(true)
     const page = document.getElementById('home')
 
     let currentScrollPos = page?.getBoundingClientRect().y
-    setOffsetY(currentScrollPos)
-    // console.log('alo', offsetY,currentScrollPos)
-    if (offsetY < currentScrollPos!) {
+    setOffset(currentScrollPos)
+    if (offset < currentScrollPos!) {
       debounceNav(true)
     } else {
       debounceNav(false)
@@ -100,39 +95,54 @@ export default function Home() {
     }
   }, [currentContainer])
 
+  // useEffect(() => {
+  //   const element = document.getElementsByClassName('controllclass')[0]
+  //   element.scrollTo(0,3000)
+  //   console.log('element', element.scrollTop)
+  // }, [])
+
+  const scrollIntoView = () => {
+    const element: any = document.getElementById('scrolly')
+    console.log('element', element)
+    element.scrollIntoView({ behavior: 'smooth' })
+  }
+
   return (
-    <div className="-bg--color-black h-screen">
+    <div className="h-screen -bg--color-black">
       <Head>
         <title>Restaurant UI UX</title>
         <link rel="icon" href="/favicon.ico" />
         <meta name="description" content="Restaurant UI UX for e-commerce" />
       </Head>
 
-      <main id="maincontainer " className="relative ">
+      <main
+        id="maincontainer"
+        className=" h-screen overflow-y-scroll scrollbar-hide"
+        onScroll={onScroll}
+      >
         <Navbar navbar={navbar} />
-        <Scrollbar
-          ref={scrollbarRef}
-          className={`h-screen overflow-y-scroll scrollbar-hide ${styles} `}
-          onScroll={onScroll}
-          thumbMinSize={0}
+
+        <div
+          className={`relative`}
+
+          // thumbMinSize={0}
         >
-          <div className=" -bg--color-black">
-            <Headerr />
-            <AboutUs />
-            <SpecialMenu />
-            <Chef />
-            <Intro ref={introRef} />
-            <Laurels />
-            <Gallery />
-            <FindUs />
-            <Footer />
-          </div>
-        </Scrollbar>
-        <CurrentContainer
-          hidePage={hidePage}
-          currentContainer={currentContainer}
-          debounceHide={debounceHide}
-        ></CurrentContainer>
+          <Headerr />
+
+          <AboutUs />
+          <SpecialMenu />
+          <Chef />
+          <Intro ref={introRef} />
+          <Laurels />
+          <Gallery />
+          <FindUs />
+          <Footer />
+          <CurrentContainer
+            hidePage={hidePage}
+            currentContainer={currentContainer}
+            debounceHide={debounceHide}
+          ></CurrentContainer>
+        </div>
       </main>
     </div>
   )
