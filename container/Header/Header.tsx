@@ -14,6 +14,7 @@ const Headerr = ({}) => {
         <Title
           className="p__cormorant text-[90px] leading-[117px]
            tracking-[.04em] -text--color-golden"
+          container="home"
         >
           The Key to Fine Dining
         </Title>

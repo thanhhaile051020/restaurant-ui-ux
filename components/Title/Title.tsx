@@ -7,37 +7,41 @@ import styles from './Title.module.css'
 const Title = ({
   children,
   className,
+  container,
 }: {
   children: any
   className: string
+  container: string
 }) => {
   const [conertTitle, setConertTitle] = useState([])
   const [animation, setAnimation] = useState(false)
   const [currentContainerAtom, setCurrentContainerAtom] =
     useRecoilState<string>(containerState)
   useEffect(() => {
-    if (children[1] == '') return
-    let conertTitle = children[1].split(' ')
+    console.log('child', children)
+    if (children == '') return
+    let conertTitle = children.split(' ')
     setConertTitle(conertTitle)
   }, [])
   const debounceAnimation = useCallback(
-    debounce(() => setAnimation(false), 3000),
+    debounce(() => setAnimation(false), 1500),
     []
   )
   useEffect(() => {
-    if (currentContainerAtom === 'home') {
+    if (currentContainerAtom === container) {
       setAnimation(true)
       debounceAnimation()
     }
   }, [currentContainerAtom])
 
   return (
-    <h1 className={`${className} ${styles.textAnimation}`}>
+    <h1 className={`${className} ${styles.textAnimation} `}>
       {conertTitle.map((title: string, index) => (
         <span
-        key={index}
-          className={`${className}  ${styles.span} 
-        `}
+          key={index}
+          style={{ animationDelay: (index + 1) / 10 + 's' }}
+          className={` ${styles.span}  ${animation ? styles.active : ''}
+      `}
         >
           {title}&nbsp;
         </span>

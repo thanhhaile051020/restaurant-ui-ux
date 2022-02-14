@@ -45,7 +45,7 @@ export default function Home() {
       // console.log('cur', currentContainer)
       setCurrentContainer(currentContainer)
       setCurrentContainerAtom(currentContainer)
-    }, 500),
+    },0),
     []
   )
 
@@ -76,7 +76,7 @@ export default function Home() {
 
   const getCurrentContainer = (value: number) => {
     let containers = ['home', 'about', 'menu', 'chef', 'intro', 'gallery']
-    let currentHeight = 70
+    let currentHeight = -5
 
     for (let i = 0; i < containers.length; i++) {
       let cont = containers[i]

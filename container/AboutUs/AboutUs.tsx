@@ -1,4 +1,5 @@
 import React from 'react'
+import Title from '../../components/Title/Title'
 
 import { images } from '../../constants'
 
@@ -13,7 +14,9 @@ const AboutUs = () => (
     </div>
     <div className="flex__center z-[2] w-[100%] flex-col md:flex-row">
       <div className=" flex flex-1 flex-col items-end justify-end text-right">
-        <h1 className="headtext__cormorant">About Us</h1>
+        <Title className="headtext__cormorant" container="about">
+          About Us
+        </Title>
         <img src={images.spoon.src} alt="about_spoon" className="spoon__img" />
         <p className="p__opensans my-[2rem] mx-0 -text--color-grey">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quis pharetra
@@ -28,7 +31,9 @@ const AboutUs = () => (
         <img className="h-[910px]" src={images.knife.src} alt="about_knife" />
       </div>
       <div className="flex flex-1 flex-col items-start justify-start text-left">
-        <h1 className="headtext__cormorant">Our History</h1>
+        <Title className="headtext__cormorant" container="about">
+          Our History
+        </Title>
         <img src={images.spoon.src} alt="about_spoon" className="spoon__img" />
         <p className="p__opensans my-[2rem] mx-0 -text--color-grey">
           Adipiscing tempus ullamcorper lobortis odio tellus arcu volutpat.

@@ -6,6 +6,7 @@ import {
   BsArrowLeftShort,
   BsArrowRightShort,
 } from 'react-icons/bs'
+import Title from '../../components/Title/Title'
 
 const galleries = [
   images.gallery01,
@@ -28,16 +29,20 @@ const Gallery = () => {
   return (
     <div
       className="flex__center flex flex-col -bg--color-black py-[4rem] 
-      pr-0  pl-[2rem] md:pl-[4rem] lg:flex-row lg:pl-[6rem] " id="gallery"
+      pr-0  pl-[2rem] md:pl-[4rem] lg:flex-row lg:pl-[6rem] "
+      id="gallery"
     >
       <div
-        className="flex md:min-w-[500px] flex-1 flex-col items-start justify-center pr-[2rem]
+        className="flex flex-1 flex-col items-start justify-center pr-[2rem] md:min-w-[500px]
       3xl:min-w-[1000px]
       3xl:pr-[4rem] 
       "
       >
         <SubHeading title="Instagram" />
-        <h1 className="headtext__cormorant ">Photo Gallery</h1>
+        {/* <h1 className="headtext__cormorant ">Photo Gallery</h1> */}
+        <Title className="headtext__cormorant" container="gallery">
+          Photo Gallery
+        </Title>
         <p className="p__opensans mt-[2rem] -text--color-grey">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Volutpat
           mattis ipsum turpis elit elit scelerisque egestas mu.
@@ -46,7 +51,7 @@ const Gallery = () => {
           View More
         </button>
       </div>
-      <div className="ml-[0rem] relative my-[5rem] mx-0 flex max-w-[100%] flex-1 flex-row lg:m-0 lg:max-w-[50%]">
+      <div className="relative my-[5rem] mx-0 ml-[0rem] flex max-w-[100%] flex-1 flex-row lg:m-0 lg:max-w-[50%]">
         <div
           className={` flex w-max flex-row overflow-x-scroll scrollbar-hide
            `}
@@ -54,7 +59,7 @@ const Gallery = () => {
         >
           {galleries.map((img, index) => (
             <div
-              className="min-w-[240px] h-[320px] flex__center relative mr-[2rem] md:h-[447px] md:min-w-[301px] ease-linear 3xl:h-[550px] 3xl:min-w-[400px]"
+              className="flex__center relative mr-[2rem] h-[320px] min-w-[240px] ease-linear md:h-[447px] md:min-w-[301px] 3xl:h-[550px] 3xl:min-w-[400px]"
               key={`gallery_img-${index + 1}`}
             >
               <img
