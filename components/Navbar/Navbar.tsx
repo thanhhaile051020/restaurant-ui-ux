@@ -11,16 +11,16 @@ const Navbar = ({ navbar }: { navbar: boolean }) => {
     <nav
       className={`fixed flex  items-center
      justify-between -bg--color-black p-[1rem] transition-[100ms] ease-out sm:py-[1rem] 
-      sm:px-[2rem] ${
-        navbar ? 'top-[0px]' : 'top-[-90.960px]'
-      } w-[100%] z-[10]`}
+      sm:px-[2rem] ${navbar ? 'top-[0px]' : 'top-[-90.960px]'} z-[10] w-[100%]`}
     >
       <div className=" flex items-center justify-start">
-        <img
-          className="w-[110px] sm:w-[150px] 2xl:w-[210px] "
-          src={images.gericht.src}
-          alt="app logo"
-        />
+        <a href="/">
+          <img
+            className="w-[110px] sm:w-[150px] 2xl:w-[210px] "
+            src={images.gericht.src}
+            alt="app logo"
+          />
+        </a>
       </div>
       <ul className={`${styles.li} `}>
         <li className="p__opensans   ">
@@ -69,13 +69,13 @@ const Navbar = ({ navbar }: { navbar: boolean }) => {
               onClick={() => setToggleMenu(false)}
             />
             <ul>
-              {['Home', 'About', 'Menu', 'Awards', 'Contact'].map(
+              {['home', 'about', 'menu', 'awards', 'contact'].map(
                 (item, index) => (
                   <li
                     key={index}
                     className="m-[2rem] text-center font-Cormorant text-[2rem] -text--color-golden hover:-text--color-white"
                   >
-                    <a href="#home">{item}</a>
+                    <a href={`#${item}`}>{item}</a>
                   </li>
                 )
               )}
