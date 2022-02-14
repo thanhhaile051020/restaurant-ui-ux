@@ -30,8 +30,9 @@ const Title = ({
   useEffect(() => {
     if (currentContainerAtom === container) {
       setAnimation(true)
-      debounceAnimation()
+    
     }
+ 
   }, [currentContainerAtom])
 
   return (
